@@ -39,7 +39,7 @@ app.use(express.static('public'));
 app.post("/api/mail", function (req, res) {
   let msg = msgTemplate;
   msg.content[0].value = req.body.name + " says:\n" + req.body.message;
-  msg.personalizations[0].subject += req.body.email;
+  msg.personalizations[0].subject = req.body.email;
   sgMail.send(msg);
   console.log("Sending Mail now.");
   res.json(msg);
