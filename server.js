@@ -1,8 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const express = require("express");
+const cors = require('cors');
 const sgMail = require('@sendgrid/mail');
-
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const msgTemplate = {
@@ -33,6 +33,7 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
 app.use(express.static('public'));
 
 app.post("/api/mail", function (req, res) {
